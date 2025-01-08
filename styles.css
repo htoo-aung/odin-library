@@ -53,6 +53,8 @@ body {
 
 .btn-add {
   color: #F4F4F4;
+  width: 6rem;
+  height: 2rem;
   font-weight: 600;
   font-family: inherit;
   background-color: #1D1D1F;
@@ -68,11 +70,19 @@ body {
   background-color: #727277;
 }
 
-.main {
+#main {
   display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  /* fix row taking up whole main container */
+  grid-auto-rows: 1fr;
+  padding: 3rem;
 }
 
 .card {
   background-color: var(--card-color);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
 }
