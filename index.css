@@ -1,0 +1,15 @@
+* {
+    font-size: 16px;
+}
+
+:root {
+  --main-colour: #1D1D1F;
+  --card-colour: #86868B;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
