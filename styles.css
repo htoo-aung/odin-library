@@ -13,15 +13,17 @@
 
 body {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .wrapper {
   background-color: var(--main-color);
-  height: 100%;
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: minmax(6rem, 6.5rem) 5fr;
 }
 
 .header {
@@ -74,13 +76,13 @@ body {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
-  /* fix row taking up whole main container */
-  grid-auto-rows: 1fr;
+  grid-auto-rows: auto;
   padding: 3rem;
 }
 
 .card {
   background-color: var(--card-color);
+  height: 18rem;
   display: flex;
   justify-content: center;
   align-items: center;
