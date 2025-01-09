@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   displayBooks(myLibrary);
+  openModal();
+  closeModalListener();
   addBook();
-  closeModal();
 });
 
 const myLibrary = [];
 
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.read = read;
 }
 
 function addBookToLibrary(book) {
@@ -22,6 +24,10 @@ function displayBooks(arr) {
   arr.forEach((book) => {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
+
+    if (book.read) {
+      newCard.classList.add("card-read");
+    }
 
     // create and add book properties to the card text display
     newCard.innerHTML = 
@@ -40,14 +46,9 @@ function displayBooks(arr) {
   });
 }
 
-function readBook() {
-
-}
-
-function addBook() {
+function openModal() {
   const addBtn = document.getElementById("btn-add");
   const modal = document.getElementById("modal");
-  console.log("clicked");
   
   addBtn.addEventListener("click", () => {
     modal.showModal();
@@ -55,12 +56,35 @@ function addBook() {
   });
 }
 
-function closeModal() {
+function closeModal(modal) {
+  modal.close();
+  modal.classList.remove("modal-show");
+}
+
+function closeModalListener() {
   const modal = document.getElementById("modal");
   const modalExitBtn = document.getElementById("close-modal-btn");
 
   modalExitBtn.addEventListener("click", () => {
-    modal.close();
-    modal.classList.remove("modal-show");
+    closeModal(modal);
   });
 }
+
+function addBook() {
+  const addBookBtn = document.getElementById("modal-submit");
+  const modal = document.getElementById("modal");
+
+  addBookBtn.addEventListener('click', () => {
+    const bookTitle = document.getElementById("modal-title").value;
+    const bookAuthor = document.getElementById("modal-author").value;
+    const bookPages = document.getElementById("modal-pages").value;
+    const bookRead = document.getElementById("modal-read").checked;
+
+    const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+
+    addBookToLibrary(newBook);
+    displayBooks([newBook]);
+    closeModal(modal);
+  });
+}
+

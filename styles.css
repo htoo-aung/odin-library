@@ -176,9 +176,9 @@ body {
 }
 
 #close-modal-btn {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 16px;
+  width: 1.5rem;
+  height: 1.6rem;
+  border-radius: 6px;
   border: 2px solid  #6E6E73;
   color: #F4F4F4;
   background-color: var(--main-color);
