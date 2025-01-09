@@ -25,8 +25,14 @@ function displayBooks(arr) {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
 
+    let bookRead;
+
     if (book.read) {
+      bookRead = '<input class="book-read" type="checkbox" id="read" name="read" checked></input>';
       newCard.classList.add("card-read");
+    }
+    else {
+      bookRead = '<input class="book-read" type="checkbox" id="read" name="read"></input>';
     }
 
     // create and add book properties to the card text display
@@ -37,7 +43,7 @@ function displayBooks(arr) {
       <p class="book-pages">pages. ${book.pages}</p>
       <div class="book-status">
         <label for="read" >read.</label>
-        <input class="book-read" type="checkbox" id="read" name="read">
+        ${bookRead}
       </div>
     `;
 
@@ -51,6 +57,7 @@ function openModal() {
   const modal = document.getElementById("modal");
   
   addBtn.addEventListener("click", () => {
+    resetModalInputs();
     modal.showModal();
     modal.classList.add("modal-show");
   });
@@ -88,3 +95,9 @@ function addBook() {
   });
 }
 
+function resetModalInputs() {
+  document.getElementById("modal-title").value = '';
+  document.getElementById("modal-author").value = '';
+  document.getElementById("modal-pages").value = '';
+  document.getElementById("modal-read").checked = false;
+}
