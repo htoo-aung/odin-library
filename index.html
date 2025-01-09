@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Odin Library</title>
+    <title>htoolib.</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="styles.css" rel="stylesheet">
@@ -16,12 +16,30 @@
           <h1>htoolib.</h1>
         </div>
         <div class="header-right">
-          <button class="btn-add">add book.</button>
+          <button id="btn-add">add book.</button>
         </div>
       </header>
       
       <div id="main">
-        
+        <dialog id="modal">
+          <button id="close-modal-btn">X</button>
+
+          <label for="modal-title"><b>title.</b></label>
+          <input type="text" id="modal-title">
+
+          <label for="modal-author"><b>author.</b></label>
+          <input type="text" id="modal-author">
+
+          <label for="modal-pages"><b>pages.</b></label>
+          <input type="text" id="modal-pages">
+
+          <div id="modal-read-wrapper">
+            <label for="modal-read"><b>read</b>.</label>
+            <input type="checkbox" name="" id="modal-read">
+          </div>
+
+          <button id="modal-submit">add book.</button>
+        </dialog>
       </div>
     </div>
   </body>
