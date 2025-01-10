@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   openModal();
   closeModalListener();
   addBook();
+  removeBook();
 });
 
 const myLibrary = [];
@@ -18,32 +19,42 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+function removeBookFromLibrary(index) {
+  myLibrary.splice(index, 1);
+
+  const mainContainer = document.getElementById("main");
+  mainContainer.innerHTML = '';
+
+  displayBooks(myLibrary);
+}
+
 function displayBooks(arr) {
   const mainContainer = document.getElementById("main");
 
-  arr.forEach((book) => {
+  arr.forEach((book, index) => {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
 
-    let bookRead;
+    newCard.setAttribute('data-index', index);
 
+    let bookRead;
     if (book.read) {
-      bookRead = '<input class="book-read" type="checkbox" id="read" name="read" checked></input>';
-      newCard.classList.add("card-read");
+      bookRead = "checked";
     }
     else {
-      bookRead = '<input class="book-read" type="checkbox" id="read" name="read"></input>';
+      bookRead = "";
     }
 
     // create and add book properties to the card text display
     newCard.innerHTML = 
     `
+      <button id="remove-card-btn">remove.</button>
       <h1 class="book-title">${book.title}</h1>
       <p class="book-author">author. ${book.author}</p>
       <p class="book-pages">pages. ${book.pages}</p>
       <div class="book-status">
         <label for="read" >read.</label>
-        ${bookRead}
+        <input class="book-read" type="checkbox" id="read" name="read" ${bookRead}></input>
       </div>
     `;
 
@@ -71,8 +82,10 @@ function closeModal(modal) {
 function closeModalListener() {
   const modal = document.getElementById("modal");
   const modalExitBtn = document.getElementById("close-modal-btn");
+  const errorMessage = document.getElementById("error-message");
 
   modalExitBtn.addEventListener("click", () => {
+    errorMessage.style.display = "none";
     closeModal(modal);
   });
 }
@@ -87,11 +100,33 @@ function addBook() {
     const bookPages = document.getElementById("modal-pages").value;
     const bookRead = document.getElementById("modal-read").checked;
 
-    const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+    const errorMessage = document.getElementById("error-message");
 
+    if (!bookTitle || !bookAuthor || !bookPages) {
+      errorMessage.style.display = "block";
+      return;
+    }
+
+    errorMessage.style.display = "none";
+    const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
     addBookToLibrary(newBook);
+    
     displayBooks([newBook]);
     closeModal(modal);
+  });
+}
+
+function removeBook() {
+  const mainContainer = document.getElementById("main");
+
+  mainContainer.addEventListener("click", (e) => {
+    if (e.target.id === "remove-card-btn") {
+      const card = e.target.parentElement;
+
+      const index = card.getAttribute('data-index');
+
+      removeBookFromLibrary(index);
+    }
   });
 }
 

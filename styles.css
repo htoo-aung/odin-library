@@ -82,6 +82,7 @@ body {
 }
 
 .card {
+  position: relative;
   background-color: var(--card-color);
   height: 18rem;
   display: flex;
@@ -92,7 +93,7 @@ body {
 }
 
 .card-read {
-  border-color: var(--read);
+  border: 2px solid var(--read);
 }
 
 .card h1, 
@@ -155,6 +156,15 @@ body {
   width: 20%;
 }
 
+#error-message {
+  display: none;
+  color: var(--soft-white);
+  position: absolute;
+  bottom: 5.6rem;
+  right: 3rem;
+  align-self: center;
+}
+
 #modal-submit {
   color: #F4F4F4;
   width: 6rem;
@@ -192,6 +202,26 @@ body {
 }
 
 #close-modal-btn:active {
+  background-color: #727277;
+}
+
+#remove-card-btn {
+  width: 5rem;
+  height: 1.6rem;
+  border-radius: 6px;
+  border: none;
+  color: #F4F4F4;
+  background-color: var(--main-color);
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+
+#remove-card-btn:hover {
+  background-color: #9A9A9F;
+}
+
+#remove-card-btn:active {
   background-color: #727277;
 }
 
