@@ -43,6 +43,8 @@ function createBook(title, author, pages) {
  */
 function addBookToLibrary(book) {
   myLibrary.push(book);
+
+  refreshDisplay(myLibrary);
 }
 
 /**
@@ -81,19 +83,21 @@ function createCard(title, author, pages) {
   return newCard;
 }
 
-function displayBooks(array) {
-  if (array.length === 0) {
-    return;
-  }
-
+/**
+ * Displays all of the Book objects in the library array.
+ * @param {Array} array - Array holding all the Book objects
+ */
+function refreshDisplay(array) {
   const displayContainer = document.getElementById('main');
 
-  for (const book in array) {
-    const bookTitle = book.title;
-    const bookAuthor = book.author;
-    const bookPages = book.pages;
+  displayContainer.innerHTML = '';
 
-    const newCard = createCard(bookTitle, bookAuthor, bookPages);
-    displayContainer.appendChild(newCard);
-  }
+  array.forEach(book => {
+    const newCard = createCard(book.title, book.author, book.pages);
+    displayContainer.appendChildn(newCard);
+  });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  refreshDisplay();
+});
