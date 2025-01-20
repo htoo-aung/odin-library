@@ -11,11 +11,11 @@ class Book {
    * @param {number} pages - The number of pages in the book
    * @param {boolean} read - The read status of the book
    */
-  constructor(title, author, pages, read) {
+  constructor(title, author, pages) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.read = false;
   }
 
   /**
