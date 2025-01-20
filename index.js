@@ -45,13 +45,27 @@ function createCard(title, author, pages) {
   const newCard = document.createElement('div');
   newCard.classList.add('card');
 
-  newCard.innerHTML = 
-  `
-    <p class="book-title">${title}</p>
-    <p class="book-author">${author}</p>
-    <p class="book-pages">${pages}</p>
-    <button class="book-read-btn">Read</button>
-  `;
+  // Card content
+  const bookTitle = document.createElement('p');
+  bookTitle.classList.add('book-title');
+  bookTitle.textContent = title;
+
+  const bookAuthor = document.createElement('p');
+  bookAuthor.classList.add('book-author');
+  bookAuthor.textContent = author;
+
+  const bookPages = document.createElement('p');
+  bookPages.classList.add('book-pages');
+  bookPages.textContent = pages;
+
+  const readButton = document.createElement('button');
+  readButton.classList.add('book-read-btn');
+  readButton.textContent = 'Read';
+
+  newCard.appendChild(bookTitle);
+  newCard.appendChild(bookAuthor);
+  newCard.appendChild(bookPages);
+  newCard.appendChild(readButton);
 
   return newCard;
 }
