@@ -70,6 +70,19 @@ function createCard(title, author, pages) {
   return newCard;
 }
 
-const test = document.getElementById('main');
-const card = createCard("hello", "htoo", 25);
-test.appendChild(card);
+function displayBooks(array) {
+  if (array.length === 0) {
+    return;
+  }
+
+  const displayContainer = document.getElementById('main');
+
+  for (const book in array) {
+    const bookTitle = book.title;
+    const bookAuthor = book.author;
+    const bookPages = book.pages;
+
+    const newCard = createCard(bookTitle, bookAuthor, bookPages);
+    displayContainer.appendChild(newCard);
+  }
+}
