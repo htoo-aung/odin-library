@@ -125,6 +125,26 @@ body {
   font-size: 1.2rem;
 }
 
+.book-read-btn {
+  color: #F4F4F4;
+  width: 6rem;
+  height: 2rem;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #727277;
+  border-radius: 6px;
+  border: none;
+  margin: 16px;
+}
+
+.book-read-btn:hover {
+  background-color: #9A9A9F;
+}
+
+.book-read-btn:active {
+  background-color: #727277;
+}
+
 .modal-show {
   display: flex;
   flex-direction: column;
