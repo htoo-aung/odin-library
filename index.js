@@ -27,6 +27,17 @@ class Book {
 }
 
 /**
+ * Creates an instance of a Book object
+ * @param {String} title - Title of the book
+ * @param {String} author - Author of the book
+ * @param {Number} pages - Amount of pages of the book
+ * @returns A new book object
+ */
+function createBook(title, author, pages) {
+  return new Book(title, author, pages);
+}
+
+/**
  * 
  * @param {Book} book - Book to add to the library
  */
