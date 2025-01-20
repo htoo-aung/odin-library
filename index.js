@@ -33,3 +33,14 @@ class Book {
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
+
+function createCard() {
+  // create a div make a card and add the proper elements to them
+  // div class card > title, author, page, read button
+  const newCard = document.createElement('div');
+  const cardTitle = document.createElement('p');
+  const cardAuthor = document.createElement('p');
+  const cardPages = document.createElement('p');
+  const readButton = document.createElement('button');
+
+}
