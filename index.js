@@ -60,7 +60,7 @@ function createCard(title, author, pages) {
 
   const readButton = document.createElement('button');
   readButton.classList.add('book-read-btn');
-  readButton.textContent = 'Read';
+  readButton.textContent = 'read.';
 
   newCard.appendChild(bookTitle);
   newCard.appendChild(bookAuthor);

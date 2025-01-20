@@ -17,6 +17,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Montserrat';
 }
 
 .wrapper {
@@ -56,7 +57,7 @@ body {
 
 #btn-add {
   color: #F4F4F4;
-  width: 6rem;
+  width: 7rem;
   height: 2rem;
   font-weight: 600;
   font-family: inherit;
