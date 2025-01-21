@@ -111,3 +111,5 @@ const test3 = createBook('gf', 'f', 23);
 addBookToLibrary(test3);
 const test4 = createBook('gf', 'f', 23);
 addBookToLibrary(test4);
+const test5 = createBook('gf', 'f', 23);
+addBookToLibrary(test5);
