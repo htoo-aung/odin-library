@@ -84,6 +84,7 @@ body {
 }
 
 .card {
+  padding: 1rem;
   position: relative;
   background-color: var(--card-color);
   height: 18rem;
@@ -92,10 +93,11 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 6px;
+  border: var(--card-color) solid 3px;
 }
 
 .card-read {
-  border: 4px solid var(--read);
+  border-color: var(--read);
 }
 
 .card h1, 

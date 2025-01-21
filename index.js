@@ -77,8 +77,8 @@ function createCard(title, author, pages) {
 
   const readButton = document.createElement('button');
   readButton.classList.add('book-read-btn');
-  readButton.setAttribute('onclick', 'onClickRead()'); // Need to do something here
   readButton.textContent = 'read.';
+  readButton.addEventListener('click', onClickRead);
 
   newCard.appendChild(bookTitle);
   newCard.appendChild(bookAuthor);
@@ -101,6 +101,18 @@ function refreshDisplay(array) {
     const newCard = createCard(book.title, book.author, book.pages);
     displayContainer.appendChild(newCard);
   });
+}
+
+function onClickRead(event) {
+  const button = event.target; 
+  const card = button.parentElement;  
+  card.classList.toggle('card-read'); 
+  
+  const bookTitle = card.querySelector('.book-title').textContent;
+  const bookInLibrary = myLibrary.find(book => book.title === bookTitle);
+  if (bookInLibrary) {
+      bookInLibrary.toggleReadStatus();
+  }
 }
 
 const test1 = createBook('gf', 'f', 23);
