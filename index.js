@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
+  refreshDisplay(myLibrary);
+});
+
 const myLibrary = [];
 
 /**
@@ -73,6 +77,7 @@ function createCard(title, author, pages) {
 
   const readButton = document.createElement('button');
   readButton.classList.add('book-read-btn');
+  readButton.setAttribute('onclick', 'onClickRead()'); // Need to do something here
   readButton.textContent = 'read.';
 
   newCard.appendChild(bookTitle);
@@ -94,10 +99,15 @@ function refreshDisplay(array) {
 
   array.forEach(book => {
     const newCard = createCard(book.title, book.author, book.pages);
-    displayContainer.appendChildn(newCard);
+    displayContainer.appendChild(newCard);
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  refreshDisplay();
-});
+const test1 = createBook('gf', 'f', 23);
+addBookToLibrary(test1);
+const test2 = createBook('gf', 'f', 23);
+addBookToLibrary(test2);
+const test3 = createBook('gf', 'f', 23);
+addBookToLibrary(test3);
+const test4 = createBook('gf', 'f', 23);
+addBookToLibrary(test4);

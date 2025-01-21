@@ -77,9 +77,10 @@ body {
 #main {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, 1fr); /* add minmax() to the cards so they look better on a widescreen */
+  grid-template-columns: repeat(3, minmax(15%, 25%)); /* add minmax() to the cards so they look better on a widescreen */
   grid-auto-rows: auto;
   padding: 3rem;
+  justify-content: center;
 }
 
 .card {
