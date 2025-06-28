@@ -1,127 +1,90 @@
-document.addEventListener("DOMContentLoaded", () => {
-  refreshDisplay(myLibrary);
-});
+const myLibrary = []
+const myLibrary2 = []
 
-const myLibrary = [];
+const modal = document.getElementById("modal");
+const openBtn = document.getElementById("btn-add");
+const closeBtn = document.getElementById("close-modal-btn");
+const modalSubmitBtn = document.getElementById("modal-submit");
 
-/**
- * Represents a book in a library.
- */
-class Book {
-  /**
-   * Creates a new Book instance.
-   * @param {String} title - Title of the book
-   * @param {String} author - Author of the book
-   * @param {Number} pages - The number of pages in the book
-   * @param {Boolean} read - The read status of the book
-   */
-  constructor(title, author, pages) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = false;
-  }
+function Book(title, author, pages, read = false) {
+  this.book_id = crypto.randomUUID();
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+};
 
-  /**
-   * Toggles the read status of the book
-   */
-  toggleReadStatus() {
-    this.read = !this.read;
-  }
+function addBookToLibrary(library, title, author, pages, read = false) {
+  const newBook = new Book(title, author, pages, read);
+  library.push(newBook);
+}
+
+function createCard(title, author, pages, read) {
+  const card = document.createElement('div');
+  card.className = "card";
+
+  const cardTitle = document.createElement('p');
+  cardTitle.textContent = title;
+
+  const cardAuthor = document.createElement('p');
+  cardAuthor.textContent = author;
+
+  const cardPages = document.createElement('p');
+  cardPages.textContent = pages;
+
+  card.appendChild(cardTitle);
+  card.appendChild(cardAuthor);
+  card.appendChild(cardPages);
+
+  return card;
 }
 
 /**
- * Creates an instance of a Book object
- * @param {String} title - Title of the book
- * @param {String} author - Author of the book
- * @param {Number} pages - Amount of pages of the book
- * @returns A new book object
- */
-function createBook(title, author, pages) {
-  return new Book(title, author, pages);
-}
-
-/**
+ * Take in any array with book objects to display different libraries
  * 
- * @param {Book} book - Book to add to the library
+ * @param {*} libraryArr Array of book objects
+ * @returns void
  */
-function addBookToLibrary(book) {
-  myLibrary.push(book);
+function renderBooks(libraryArr) {
+  if (libraryArr.length == 0) {
+    return;
+  }
 
-  refreshDisplay(myLibrary);
-}
+  const main = document.getElementById('main');
 
-/**
- * Creates a card container to hold all the data of the Book object in p elements.
- * @param {String} title - Title of the Book object
- * @param {String} author - Author of the Book object
- * @param {Number} pages - Author of the Book object
- * @returns A div with elements holding book data as a children; a card
- */
-function createCard(title, author, pages) {
-  const newCard = document.createElement('div');
-  newCard.classList.add('card');
+  libraryArr.forEach(book => {
+    const cardTitle = book.title;
+    const cardAuthor = book.author;
+    const cardPages = book.pages;
+    const cardRead = book.read;
 
-  // Card content
-  const bookTitle = document.createElement('p');
-  bookTitle.classList.add('book-title');
-  bookTitle.textContent = title;
-
-  const bookAuthor = document.createElement('p');
-  bookAuthor.classList.add('book-author');
-  bookAuthor.textContent = author;
-
-  const bookPages = document.createElement('p');
-  bookPages.classList.add('book-pages');
-  bookPages.textContent = pages;
-
-  const readButton = document.createElement('button');
-  readButton.classList.add('book-read-btn');
-  readButton.textContent = 'read.';
-  readButton.addEventListener('click', onClickRead);
-
-  newCard.appendChild(bookTitle);
-  newCard.appendChild(bookAuthor);
-  newCard.appendChild(bookPages);
-  newCard.appendChild(readButton);
-
-  return newCard;
-}
-
-/**
- * Displays all of the Book objects in the library array.
- * @param {Array} array - Array holding all the Book objects
- */
-function refreshDisplay(array) {
-  const displayContainer = document.getElementById('main');
-
-  displayContainer.innerHTML = '';
-
-  array.forEach(book => {
-    const newCard = createCard(book.title, book.author, book.pages);
-    displayContainer.appendChild(newCard);
+    const card = createCard(cardTitle, cardAuthor, cardPages, cardRead);
+    main.appendChild(card);
   });
 }
 
-function onClickRead(event) {
-  const button = event.target; 
-  const card = button.parentElement;  
-  card.classList.toggle('card-read'); 
-  
-  const bookTitle = card.querySelector('.book-title').textContent;
-  const bookInLibrary = myLibrary.find(book => book.title === bookTitle);
-  if (bookInLibrary) {
-      bookInLibrary.toggleReadStatus();
-  }
+function openModal() {
+  modal.showModal();
 }
 
-const test1 = createBook('gf', 'f', 23);
-addBookToLibrary(test1);
-const test2 = createBook('gf', 'f', 23);
-addBookToLibrary(test2);
-const test3 = createBook('gf', 'f', 23);
-addBookToLibrary(test3);
-const test4 = createBook('gf', 'f', 23);
-addBookToLibrary(test4);
-const test5 = createBook('gf', 'f', 23);
-addBookToLibrary(test5);
+function closeModal() {
+  modal.close();
+}
+
+function submitModal() {
+  const modalTitle = document.getElementById('modal-title').value;
+  const modalAuthor = document.getElementById('modal-author').value;
+  const modalPages = document.getElementById('modal-pages').value;
+
+  addBookToLibrary(myLibrary, modalTitle, modalAuthor, modalPages, false);
+  closeModal();
+  renderBooks(myLibrary);
+}
+
+function setupEventListeners() {
+  openBtn.addEventListener("click", openModal);
+  closeBtn.addEventListener("click", closeModal);
+  modalSubmitBtn.addEventListener("click", submitModal);
+}
+
+setupEventListeners();

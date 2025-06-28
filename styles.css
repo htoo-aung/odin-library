@@ -150,7 +150,8 @@ body {
   background-color: #727277;
 }
 
-.modal-show {
+
+#modal[open] {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -161,6 +162,7 @@ body {
   background-color: var(--card-color);
   border-radius: 6px;
   border: none;
+  padding: 1rem;
 }
 
 #modal::backdrop {
