@@ -49,6 +49,7 @@ function renderBooks(libraryArr) {
   if (libraryArr.length == 0) {
     return;
   }
+  clearRender();
 
   const main = document.getElementById('main');
 
@@ -61,6 +62,14 @@ function renderBooks(libraryArr) {
     const card = createCard(cardTitle, cardAuthor, cardPages, cardRead);
     main.appendChild(card);
   });
+}
+
+function clearRender() {
+  const main = document.getElementById('main');
+
+  while (main.firstChild) {
+    main.removeChild(main.firstChild);
+  }
 }
 
 function openModal() {
@@ -79,6 +88,17 @@ function submitModal() {
   addBookToLibrary(myLibrary, modalTitle, modalAuthor, modalPages, false);
   closeModal();
   renderBooks(myLibrary);
+  clearInputs();
+}
+
+function clearInputs() {
+  const modalTitle = document.getElementById('modal-title');
+  const modalAuthor = document.getElementById('modal-author');
+  const modalPages = document.getElementById('modal-pages');
+
+  modalTitle.value = "";
+  modalAuthor.value = "";
+  modalPages.value = "";
 }
 
 function setupEventListeners() {
