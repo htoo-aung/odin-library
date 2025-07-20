@@ -6,6 +6,8 @@ const openBtn = document.getElementById("btn-add");
 const closeBtn = document.getElementById("close-modal-btn");
 const modalSubmitBtn = document.getElementById("modal-submit");
 
+const removeBookBtn = document.getElementById("remove-card-btn");
+
 function Book(title, author, pages, read = false) {
   this.book_id = crypto.randomUUID();
   this.title = title;
@@ -32,9 +34,16 @@ function createCard(title, author, pages, read) {
   const cardPages = document.createElement('p');
   cardPages.textContent = pages;
 
+  const removeBtn = document.createElement('button');
+  removeBtn.textContent = "remove.";
+  removeBtn.className = "remove-card-btn";
+
+  removeBtn.addEventListener("click", deleteCard);
+
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
+  card.appendChild(removeBtn);
 
   return card;
 }
@@ -46,9 +55,6 @@ function createCard(title, author, pages, read) {
  * @returns void
  */
 function renderBooks(libraryArr) {
-  if (libraryArr.length == 0) {
-    return;
-  }
   clearRender();
 
   const main = document.getElementById('main');
@@ -60,6 +66,7 @@ function renderBooks(libraryArr) {
     const cardRead = book.read;
 
     const card = createCard(cardTitle, cardAuthor, cardPages, cardRead);
+    card.dataset.bookid = book.book_id;
     main.appendChild(card);
   });
 }
@@ -89,6 +96,15 @@ function submitModal() {
   closeModal();
   renderBooks(myLibrary);
   clearInputs();
+}
+
+function deleteCard(event) {
+  const parent = event.target.parentElement;
+  const bookId = parent.dataset.bookid;
+  
+  myLibrary.splice(0, myLibrary.length, ...myLibrary.filter(book => bookId !== book.book_id));
+
+  renderBooks(myLibrary);
 }
 
 function clearInputs() {

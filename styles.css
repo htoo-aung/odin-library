@@ -232,7 +232,7 @@ body {
   background-color: #727277;
 }
 
-#remove-card-btn {
+.remove-card-btn {
   width: 5rem;
   height: 1.6rem;
   border-radius: 6px;
@@ -244,11 +244,11 @@ body {
   right: 0.5rem;
 }
 
-#remove-card-btn:hover {
+.remove-card-btn:hover {
   background-color: #9A9A9F;
 }
 
-#remove-card-btn:active {
+.remove-card-btn:active {
   background-color: #727277;
 }
 
