@@ -102,8 +102,9 @@ function submitModal() {
   const modalTitle = document.getElementById('modal-title').value;
   const modalAuthor = document.getElementById('modal-author').value;
   const modalPages = document.getElementById('modal-pages').value;
+  const modalRead = document.getElementById('modal-read').value;
 
-  addBookToLibrary(myLibrary, modalTitle, modalAuthor, modalPages, false);
+  addBookToLibrary(myLibrary, modalTitle, modalAuthor, modalPages, modalRead);
   closeModal();
   renderBooks(myLibrary);
   clearInputs();
