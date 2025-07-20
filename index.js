@@ -25,6 +25,10 @@ function createCard(title, author, pages, read) {
   const card = document.createElement('div');
   card.className = "card";
 
+  if (read) {
+    card.classList.add("card-read");
+  }
+
   const cardTitle = document.createElement('p');
   cardTitle.textContent = title;
 
@@ -40,10 +44,17 @@ function createCard(title, author, pages, read) {
 
   removeBtn.addEventListener("click", deleteCard);
 
+  const readBtn = document.createElement('button');
+  readBtn.textContent = "read.";
+  readBtn.className = "book-read-btn";
+
+  readBtn.addEventListener("click", readBook);
+
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
   card.appendChild(removeBtn);
+  card.appendChild(readBtn);
 
   return card;
 }
@@ -105,6 +116,21 @@ function deleteCard(event) {
   myLibrary.splice(0, myLibrary.length, ...myLibrary.filter(book => bookId !== book.book_id));
 
   renderBooks(myLibrary);
+}
+
+function readBook(event) {
+  const parent = event.target.parentElement;
+  const bookId = parent.dataset.bookid;
+
+  const chosenBook = myLibrary.find(book => bookId === book.book_id);
+  chosenBook.read = !chosenBook.read;
+
+  if (chosenBook.read) {
+    parent.classList.add("card-read");
+  }
+  else {
+    parent.classList.remove("card-read");
+  }
 }
 
 function clearInputs() {
